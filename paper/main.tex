@@ -40,9 +40,9 @@
 \maketitle % typeset the header of the contribution
 %
 \begin{abstract}
-The paper investigates the problem of estimating a sufficient sample size. The issue of determining a sufficient sample size without specifying a statistical hypothesis about the distribution of model parameters is considered. Two approaches to determining a sufficient sample size based on likelihood function values on resampled subsets are proposed. These approaches are based on heuristics about the behavior of the likelihood function with a large number of objects in the sample. A computational experiment is conducted to analyze the properties of the proposed methods.
+The problem of determining an appropriate sample size is essential for constructing an efficient machine learning model. However, current techniques are either not rigorously proven or are specific to a particular statistical hypothesis regarding the distribution of model parameters. In this paper we propose two methods based on the likelihood values on resampled subsets. We demonstrate the validity of one of these methods in a linear regression model. Computational experiments show the convergence of the proposed functions as the sample size increases.
 
-\keywords{Sufficient sample size \and Likelihood bootstrapping \and Linear regression.}
+\keywords{Sufficient sample size \and Likelihood bootstrapping \and Linear regression}
 \end{abstract}
 %
 %
@@ -172,9 +172,36 @@ For the definitions of D-sufficiency and M-sufficiency, there is a hyperparamete
     \label{sufficient-vs-threshold}
 \end{figure}
 
+To compare the performance of the proposed methods on different datasets, samples have been chosen from the open repository \cite{UCI}. The detailed information about each dataset, the number of observations and number of features, are provided in Table~\ref{table}. For demonstration purposes, a value of the hyperparameter $\varepsilon$ has been selected, at which the value of the target function, either $D(k)$ or $M(k)$, decreases by half. The corresponding results are in Table~\ref{table}. Omissions mean that the initial sample size is not sufficient.
+
+\begin{table}[ht]
+    \centering
+    \caption{Datasets with regression task (omissions mean that the initial sample size is not sufficient)}\label{table}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Dataset name & Objects $m$ & Features $n$ & D & M \\
+    \hline
+    Abalone & 4177 & 8 & 96 & 96  \\
+    Auto MPG & 392 & 8 & 15 & 15 \\
+    Automobile & 159 & 25 & 70 & 156  \\
+    Liver Disorders & 345 & 6 & 12 & 19  \\
+    Servo & 167 & 4 & 41 & ---  \\
+    Forest fires & 517 & 12 & 208 & --- \\
+    Wine Quality & 6497 & 12 & 144 & 144  \\
+    Energy Efficiency & 768 & 9 & 24 & 442  \\
+    Student Performance & 649 & 32 & 129 & 177  \\
+    Facebook Metrics & 495 & 18 & 31 & 388   \\
+    Real Estate Valuation & 414 & 7 & 15 & 23  \\
+    Heart Failure Clinical Records & 299 & 12 & 63 & 224  \\
+    Bone marrow transplant: children & 142 & 36 & --- & --- \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\clearpage
 \section{Conclusion}
 
-Approaches to determining a sufficient sample size based on the proximity of posterior distributions of model parameters on similar subsamples are proposed. The correctness of the proposed approaches is proved under certain restrictions on the model used. The theorem on the moments of the limit posterior distribution of parameters in a linear regression model is proved. The conducted computational experiment makes it possible to analyze the properties of the proposed methods and their effectiveness.
+Approaches to determining a sufficient sample size based on the likelihood values on resampled subsets are proposed. The correctness of one of the proposed methods is proved under certain restrictions on the model used. The conducted computational experiment makes it possible to analyze the properties of the proposed methods and their effectiveness.
 
 %
 % ---- Bibliography ----
