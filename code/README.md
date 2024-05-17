@@ -33,7 +33,9 @@ jupyter notebook
 Then, open the `main.ipynb` file in the Jupyter Notebook interface.
 
 ## Files Description <a name="files-description"></a>
-- `data.py`: This file contains functions for loading and preprocessing the data.
-- `stuff.py`: This file contains miscellaneous functions used in the project.
-- `visualize.py`: This file contains functions for visualizing the data and the results.
-- `main.ipynb`: This is the main Jupyter Notebook file containing the project's code.
+- `data.py`: contains functions for loading and preprocessing data.
+- `utils.py`: contains utility functions, including for loading and saving binary files.
+- `stuff.py`: contains various functions used in the project.
+- `models.py`: contains classes of the probability models used.
+- `visualize.py`: contains functions for visualizing data and results.
+- `main.ipynb`: the main Jupyter Notebook file, containing the project's code.
