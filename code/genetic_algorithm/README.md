@@ -1,12 +1,12 @@
-# Описание содержимого директории
+# Files Description
 
-Пример работы генетического алгоритма для аппроксимации семейства функций приведен в `ga.ipynb`
+An example of using a genetic algorithm to approximate a family of functions is provided in `ga.ipynb`
 
-- `chromosome.py`: класс одной особи (индивида/хромосомы)
-- `population.py`: класс популяции, то есть набора особей
-- `ga_operations.py`: основные операции с популяцией
-  - Кроссинговер
-  - Мутация
-  - Выбор самых приспособленных особей
-  - Выбор наименее приспособленных особей
-- `algorithm.py`: непосредственно генетический алгоритм
+* `chromosome.py`: a class for an individual individual/chromosome
+* `population.py`: a class for a population, i.e. a set of individuals
+* `ga_operations.py`: main operations on the population
+	+ Crossover
+	+ Mutation
+	+ Selection of the fittest individuals
+	+ Selection of the least fit individuals
+* `algorithm.py`: the genetic algorithm itself
