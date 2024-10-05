@@ -29,13 +29,16 @@
 % an abbreviated paper title here
 %
 %\author{Nikita Kiselev\inst{1} \and Andrey Grabovoy\inst{1}}
-\author{Nikita Kiselev \and Andrey Grabovoy}
+\author{Nikita Kiselev\inst{1} \and Andrey Grabovoy\inst{2}}
 %
 \authorrunning{N. Kiselev, A. Grabovoy}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Moscow Institute of Physics and Technology, Moscow, Russia}
+\institute{Moscow Institute of Physics and Technology, Moscow, Russia;\\
+$^1$\texttt{kiselev.ns@phystech.edu};\\
+$^2$\texttt{grabovoy.av@phystech.edu}.
+}
 %
 \maketitle % typeset the header of the contribution
 %
@@ -48,7 +51,7 @@ The problem of determining an appropriate sample size is essential for construct
 %
 %
 \section{Introduction}
-The process of supervised machine learning entails the selection of a predictive model from a family of parametric models, a decision often based on specific statistical assumptions, such as optimizing a particular quality function. A model that aligns with these statistical assumptions is termed as a \textit{adequate} model \cite{bies2006genetic,cawley2010over,raschka2018model}.
+The process of supervised machine learning entails the selection of a predictive model from a family of parametric models, a decision often based on specific statistical assumptions, such as optimizing a particular quality function. A model that aligns with these statistical assumptions is termed as a \textit{adequate} model \cite{bies2006genetic,cawley2010over}.
 
 In the planning phase of a computational experiment, it is crucial to estimate the minimum required sample size, which refers to the number of objects necessary to construct a suitable model. The sample size needed to develop an adequate predictive model is called \textit{sufficient} \cite{byrd2012sample,figueroa2012predicting,balki2019sample}. 
 
@@ -136,7 +139,7 @@ The definitions proposed above can also be applied in those problems where an ar
 
 \section{Computational experiment}
 
-This section provides an empirical study of the proposed methods. Experiments were conducted on synthetic data and dataset Liver Disorders from \cite{UCI}. 
+This section provides an empirical study of the proposed methods. Experiments were conducted on synthetic data and dataset Liver Disorders from \cite{UCI}. The code is available in open source in the GitHub repository\footnote{\href{https://github.com/kisnikser/Likelihood-Bootstrapping}{\texttt{https://github.com/kisnikser/Likelihood-Bootstrapping}}}.
 
 Synthetic data is generated from linear regression and logistic regression models. The number of objects is 1000, the number of features is 20. $B=1000$ bootstrapped subsamples are used. The values of $D(k)$ and $M(k)$ are calculated.  Regression dataset Liver Disorders has 345 objects and 5 features. We also use $B=1000$ subsamples made by bootstrapping to estimate mean and variance of the loss function. 
 
@@ -145,21 +148,21 @@ In the Fig.~\ref{synthetic-regression}, we can observe the obtained dependencies
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{synthetic-regression}
-    \caption{Synthetic regression dataset}
+    \caption{Convergence of the proposed functions $D(k)$ and $M(k)$ for the synthetic regression dataset, i.e. linear regression model. Both functions tends to zero as the sample size increases.}
     \label{synthetic-regression}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{synthetic-classification}
-    \caption{Synthetic classification dataset}
+    \caption{Convergence of the proposed functions $D(k)$ and $M(k)$ for the synthetic classification dataset, i.e. logistic regression model. Both functions tends to zero as the sample size increases.}
     \label{synthetic-classification}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{liver-disorders}
-    \caption{Liver Disorders dataset}
+    \caption{Convergence of the proposed functions $D(k)$ and $M(k)$ for the Liver Disorders dataset. Both functions tends to zero as the sample size increases.}
     \label{liver-disorders}
 \end{figure}
 
@@ -168,7 +171,7 @@ For the definitions of D-sufficiency and M-sufficiency, there is a hyperparamete
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{sufficient-vs-threshold}
-    \caption{Sufficient sample size vs threshold}
+    \caption{Sufficient sample size versus threshold for three datasets: synthetic regression, synthetic classification, and Liver Disorders. As the threshold value $\varepsilon$ increases, the sufficient sample size decreases. It means, that one can choose fewer objects to satisfy the desirable values of the proposed functions $D(k)$ and $M(k)$. }
     \label{sufficient-vs-threshold}
 \end{figure}
 
@@ -176,8 +179,8 @@ To compare the performance of the proposed methods on different datasets, sample
 
 \begin{table}[ht]
     \centering
-    \caption{Datasets with regression task (omissions mean that the initial sample size is not sufficient)}\label{table}
-    \begin{tabular}{|c|c|c|c|c|}
+    \caption{Comparison of the proposed methods of sample size determination: based on $D(k)$ and $M(k)$. For each of the proposed functions the threshold value $\varepsilon$ was chosen in such way that the initial function value decreases by half. The results were obtained for a variety of datasets with regression task. Omissions in the table mean that the initial sample size is not sufficient.}\label{table}
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
     Dataset name & Objects $m$ & Features $n$ & D & M \\
     \hline
@@ -199,9 +202,17 @@ To compare the performance of the proposed methods on different datasets, sample
 \end{table}
 
 \clearpage
+\section{Discussion}
+
+In this paper, we have proposed two novel methods for determining a sufficient sample size based on the likelihood values on resampled subsets. The first method, referred to as D-sufficiency, relies on the variance of the likelihood function, while the second method, M-sufficiency, focuses on the difference in the expected likelihood function when adding an additional object to the sample. We have demonstrated the validity of the M-sufficient sample size definition in a linear regression model, under certain conditions on the model parameters.
+
+The computational experiments conducted on synthetic and real-world datasets have shown that the proposed functions, $D(k)$ and $M(k)$, converge to zero as the sample size increases. The experiments also highlight the practicality of the methods, as they can be easily applied to various datasets.
+
+The proposed methods have the potential to be applied to a wide range of models and datasets, beyond linear regression. Although we have only proved the correctness of the M-sufficient sample size definition for linear regression, the empirical results suggest that the methods may be effective for other models as well. Future work should focus on extending the theoretical analysis to other models, including probably neural networks.
+
 \section{Conclusion}
 
-Approaches to determining a sufficient sample size based on the likelihood values on resampled subsets are proposed. The correctness of one of the proposed methods is proved under certain restrictions on the model used. The conducted computational experiment makes it possible to analyze the properties of the proposed methods and their effectiveness.
+This paper introduces two novel methods, D-sufficiency and M-sufficiency, for determining a sufficient sample size based on likelihood values on resampled subsets. The validity of the M-sufficient sample size definition is demonstrated in a linear regression model, and computational experiments on synthetic and real-world datasets show that the proposed functions converge to zero as the sample size increases, highlighting the practicality of the methods. Future work should focus on extending the theoretical analysis to other models, including neural networks.
 
 %
 % ---- Bibliography ----
